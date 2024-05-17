@@ -1,16 +1,18 @@
 const labels = document.querySelectorAll(".accordion-item__label");
 const tabs = document.querySelectorAll(".accordion-tab");
 
-function toggleShow() {
-    const target = this;
-    const item = target.classList.contains("accordion-tab")
-        ? target
-        : target.parentElement;
+// Функция для переключения видимости
+const toggleShow = () => {
+    // Определяем цель клика (либо текущий элемент, либо его родитель)
+    const target = event.currentTarget;
+    const item = target.classList.contains("accordion-tab") 
+    ? target 
+    : target.parentElement;
     const group = item.dataset.actabGroup;
     const id = item.dataset.actabId;
 
-    // tabs
-    tabs.forEach(function(tab) {
+    // Обработка вкладок
+    tabs.forEach((tab) => {
         if (tab.dataset.actabGroup === group) {
             if (tab.dataset.actabId === id) {
                 tab.classList.add("accordion-active");
@@ -20,8 +22,8 @@ function toggleShow() {
         }
     });
 
-    // labels
-    labels.forEach(function(label) {
+    // Обработка меток
+    labels.forEach((label) => {
         const tabItem = label.parentElement;
 
         if (tabItem.dataset.actabGroup === group) {
@@ -32,12 +34,14 @@ function toggleShow() {
             }
         }
     });
-}
+};
 
-labels.forEach(function(label) {
+// Обработка событий для меток
+labels.forEach((label) => {
     label.addEventListener("click", toggleShow);
 });
 
-tabs.forEach(function(tab) {
+// Обработка событий для вкладок
+tabs.forEach((tab) => {
     tab.addEventListener("click", toggleShow);
-})
+});
